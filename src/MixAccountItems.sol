@@ -83,7 +83,7 @@ contract MixAccountItems {
     /**
      * @dev Add an item to the user.
      * @param itemId itemId of item to be added.
-    */
+     */
     function addItem(bytes32 itemId) external isNotAdded(itemId) isOwner(itemId) {
         // Get the list of itemIds for sender.
         bytes32[] storage itemIds = accountItemIds[msg.sender];
@@ -98,7 +98,7 @@ contract MixAccountItems {
     /**
      * @dev Remove an item from the user.
      * @param itemId itemId of item to be removed.
-    */
+     */
     function removeItem(bytes32 itemId) external isAdded(itemId) isOwner(itemId) {
         // Get the list of itemIds for sender.
         bytes32[] storage itemIds = accountItemIds[msg.sender];
@@ -159,7 +159,7 @@ contract MixAccountItems {
      * @param i Index of the item.
      * @return itemId of the item.
      */
-    function getItemId(address account, uint i) external view itemExists(account, i) returns (bytes32) {
+    function getItemIdByAccount(address account, uint i) external view itemExists(account, i) returns (bytes32) {
         return accountItemIds[account][i];
     }
 
