@@ -22,11 +22,48 @@ contract MixAccountItemsTest is DSTest {
         accountItemsProxy = new MixAccountItemsProxy(accountItems);
     }
 
-    function testFail_basic_sanity() public {
-        assertTrue(false);
+    function testControlAddItemAlreadyAdded() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.addItem(itemId);
     }
 
-    function test_basic_sanity() public {
-        assertTrue(true);
+    function testFailAddItemAlreadyAdded() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.addItem(itemId);
+        accountItems.addItem(itemId);
     }
+
+    function testControlAddItemNotOwner() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.addItem(itemId);
+    }
+
+    function testFailAddItemNotOwner() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItemsProxy.addItem(itemId);
+    }
+
+    function testControlRemoveItemNotAdded() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.addItem(itemId);
+        accountItems.removeItem(itemId);
+    }
+
+    function testFailRemoveItemNotAdded() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.removeItem(itemId);
+    }
+
+    function testControlRemoveItemNotOwner() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.addItem(itemId);
+        accountItems.removeItem(itemId);
+    }
+
+    function testFailRemoveItemNotOwner() public {
+        bytes32 itemId = itemStore.create(hex"00", hex"1234");
+        accountItems.addItem(itemId);
+        accountItemsProxy.removeItem(itemId);
+    }
+
 }
