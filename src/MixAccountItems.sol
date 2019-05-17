@@ -68,7 +68,7 @@ contract MixAccountItems {
      * @param i Index of the child.
      */
     modifier itemExists(address account, uint i) {
-        require (i < accountItemIds[account].length);
+        require (i < accountItemIds[account].length, "Item does not exist.");
         _;
     }
 
@@ -133,7 +133,7 @@ contract MixAccountItems {
      * @param i Index of the item.
      * @return itemId of the item.
      */
-    function getItemId(uint i) external view itemExists(msg.sender, i) returns (bytes32) {
+    function getItem(uint i) external view itemExists(msg.sender, i) returns (bytes32) {
         return accountItemIds[msg.sender][i];
     }
 
@@ -150,7 +150,7 @@ contract MixAccountItems {
      * @param account Account to get item count of.
      * @return Number of items in account's list.
      */
-    function getItemsCountByAccount(address account) external view returns (uint) {
+    function getItemCountByAccount(address account) external view returns (uint) {
         return accountItemIds[account].length;
     }
 
@@ -159,7 +159,7 @@ contract MixAccountItems {
      * @param i Index of the item.
      * @return itemId of the item.
      */
-    function getItemIdByAccount(address account, uint i) external view itemExists(account, i) returns (bytes32) {
+    function getItemByAccount(address account, uint i) external view itemExists(account, i) returns (bytes32) {
         return accountItemIds[account][i];
     }
 

@@ -27,20 +27,20 @@ contract MixAccountItemsProxy {
         return mixAccountItems.getItemCount();
     }
 
-    function getItemId(uint i) external view returns (bytes32) {
-        return mixAccountItems.getItemId(i);
+    function getItem(uint i) external view returns (bytes32) {
+        return mixAccountItems.getItem(i);
     }
 
     function getAllItems() external view returns (bytes32[] memory) {
         return mixAccountItems.getAllItems();
     }
 
-    function getItemsCountByAccount(address account) external view returns (uint) {
-        return mixAccountItems.getItemsCountByAccount(account);
+    function getItemCountByAccount(address account) external view returns (uint) {
+        return mixAccountItems.getItemCountByAccount(account);
     }
 
-    function getItemIdByAccount(address account, uint i) external view returns (bytes32) {
-        return mixAccountItems.getItemIdByAccount(account, i);
+    function getItemByAccount(address account, uint i) external view returns (bytes32) {
+        return mixAccountItems.getItemByAccount(account, i);
     }
 
     function getAllItemsByAccount(address account) external view returns (bytes32[] memory) {
