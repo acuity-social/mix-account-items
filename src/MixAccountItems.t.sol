@@ -1,8 +1,8 @@
 pragma solidity ^0.5.7;
 
 import "ds-test/test.sol";
-import "mix-item-store/item_store_registry.sol";
-import "mix-item-store/item_store_ipfs_sha256.sol";
+import "mix-item-store/ItemStoreRegistry.sol";
+import "mix-item-store/ItemStoreIpfsSha256.sol";
 
 import "./MixAccountItems.sol";
 import "./MixAccountItemsProxy.sol";
