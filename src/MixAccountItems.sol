@@ -58,7 +58,7 @@ contract MixAccountItems {
      * @param itemId itemId that must be owned.
      */
     modifier isOwner(bytes32 itemId) {
-        require(itemStoreRegistry.getItemStore(itemId).getOwner(itemId) == msg.sender, "Item is not owned by sender.");
+        require (itemStoreRegistry.getItemStore(itemId).getOwner(itemId) == msg.sender, "Item is not owned by sender.");
         _;
     }
 
