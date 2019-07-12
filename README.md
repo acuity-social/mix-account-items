@@ -1,2 +1,2 @@
-# mix-account-items
+# MIX Account Items
 Smart contract for associating multiple items with an account.
