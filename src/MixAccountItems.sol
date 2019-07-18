@@ -1,7 +1,6 @@
 pragma solidity ^0.5.10;
 
-import "mix-item-store/ItemStoreInterface.sol";
-import "mix-item-store/ItemStoreRegistry.sol";
+import "mix-item-store/MixItemStoreRegistry.sol";
 
 
 /**
@@ -22,9 +21,9 @@ contract MixAccountItems {
     mapping (address => mapping(bytes32 => uint)) accountItemIdIndex;
 
     /**
-     * @dev ItemStoreRegistry contract.
+     * @dev MixItemStoreRegistry contract.
      */
-    ItemStoreRegistry itemStoreRegistry;
+    MixItemStoreRegistry itemStoreRegistry;
 
     /**
      * @dev An account has added an item.
@@ -78,10 +77,10 @@ contract MixAccountItems {
     }
 
     /**
-     * @param _itemStoreRegistry Address of the ItemStoreRegistry contract.
+     * @param _itemStoreRegistry Address of the MixItemStoreRegistry contract.
      */
-    constructor(ItemStoreRegistry _itemStoreRegistry) public {
-        // Store the address of the ItemStoreRegistry contract.
+    constructor(MixItemStoreRegistry _itemStoreRegistry) public {
+        // Store the address of the MixItemStoreRegistry contract.
         itemStoreRegistry = _itemStoreRegistry;
     }
 
