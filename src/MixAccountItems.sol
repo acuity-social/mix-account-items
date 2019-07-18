@@ -4,6 +4,11 @@ import "mix-item-store/ItemStoreInterface.sol";
 import "mix-item-store/ItemStoreRegistry.sol";
 
 
+/**
+ * @title MixAccountItems
+ * @author Jonathan Brown <jbrown@mix-blockchain.org>
+ * @dev Enables users to attach a list of items to their account.
+ */
 contract MixAccountItems {
 
     /**

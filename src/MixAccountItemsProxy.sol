@@ -5,12 +5,8 @@ import "./MixAccountItems.sol";
 
 contract MixAccountItemsProxy {
 
-
     MixAccountItems mixAccountItems;
 
-    /**
-     * @param _mixAccountItems Real MixAccountItems contract to proxy to.
-     */
     constructor (MixAccountItems _mixAccountItems) public {
         mixAccountItems = _mixAccountItems;
     }
