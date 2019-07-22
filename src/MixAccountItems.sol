@@ -23,7 +23,7 @@ contract MixAccountItems {
     /**
      * @dev MixItemStoreRegistry contract.
      */
-    MixItemStoreRegistry itemStoreRegistry;
+    MixItemStoreRegistry public itemStoreRegistry;
 
     /**
      * @dev An account has added an item.
