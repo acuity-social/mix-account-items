@@ -67,16 +67,6 @@ contract MixAccountItems {
     }
 
     /**
-     * @dev Revert if a specific item does not exist in an account's list.
-     * @param account Account to check for the item.
-     * @param i Index of the child.
-     */
-    modifier itemExists(address account, uint i) {
-        require (i < accountItemIds[account].length, "Item does not exist.");
-        _;
-    }
-
-    /**
      * @param _itemStoreRegistry Address of the MixItemStoreRegistry contract.
      */
     constructor(MixItemStoreRegistry _itemStoreRegistry) public {
@@ -125,20 +115,20 @@ contract MixAccountItems {
     }
 
     /**
+     * @dev Check if a specific item is in sender's list.
+     * @param itemId itemId of item to check for.
+     * @return True if item exists in sender's list.
+     */
+    function getItemExists(bytes32 itemId) external view returns (bool) {
+        return accountItemIdIndex[msg.sender][itemId] > 0;
+    }
+
+    /**
      * @dev Get number of items in sender's list.
      * @return Number of items in sender's list.
      */
     function getItemCount() external view returns (uint) {
         return accountItemIds[msg.sender].length;
-    }
-
-    /**
-     * @dev Get a specific item from sender's list.
-     * @param i Index of the item.
-     * @return itemId of the item.
-     */
-    function getItem(uint i) external view itemExists(msg.sender, i) returns (bytes32) {
-        return accountItemIds[msg.sender][i];
     }
 
     /**
@@ -150,21 +140,22 @@ contract MixAccountItems {
     }
 
     /**
+     * @dev Check if a specific item is in account's list.
+     * @param account Account to check for item.
+     * @param itemId itemId of item to check for.
+     * @return True if item exists in sender's list.
+     */
+    function getItemExistsByAccount(address account, bytes32 itemId) external view returns (bool) {
+        return accountItemIdIndex[account][itemId] > 0;
+    }
+
+    /**
      * @dev Get number of items in account's list.
      * @param account Account to get item count of.
      * @return Number of items in account's list.
      */
     function getItemCountByAccount(address account) external view returns (uint) {
         return accountItemIds[account].length;
-    }
-
-    /**
-     * @dev Get a specific item from account's list.
-     * @param i Index of the item.
-     * @return itemId of the item.
-     */
-    function getItemByAccount(address account, uint i) external view itemExists(account, i) returns (bytes32) {
-        return accountItemIds[account][i];
     }
 
     /**

@@ -19,24 +19,24 @@ contract MixAccountItemsProxy {
         mixAccountItems.removeItem(itemId);
     }
 
-    function getItemCount() external view returns (uint) {
-        return mixAccountItems.getItemCount();
+    function getItemExists(bytes32 itemId) external view returns (bool) {
+        return mixAccountItems.getItemExists(itemId);
     }
 
-    function getItem(uint i) external view returns (bytes32) {
-        return mixAccountItems.getItem(i);
+    function getItemCount() external view returns (uint) {
+        return mixAccountItems.getItemCount();
     }
 
     function getAllItems() external view returns (bytes32[] memory) {
         return mixAccountItems.getAllItems();
     }
 
-    function getItemCountByAccount(address account) external view returns (uint) {
-        return mixAccountItems.getItemCountByAccount(account);
+    function getItemExistsByAccount(address account, bytes32 itemId) external view returns (bool) {
+        return mixAccountItems.getItemExistsByAccount(account, itemId);
     }
 
-    function getItemByAccount(address account, uint i) external view returns (bytes32) {
-        return mixAccountItems.getItemByAccount(account, i);
+    function getItemCountByAccount(address account) external view returns (uint) {
+        return mixAccountItems.getItemCountByAccount(account);
     }
 
     function getAllItemsByAccount(address account) external view returns (bytes32[] memory) {
