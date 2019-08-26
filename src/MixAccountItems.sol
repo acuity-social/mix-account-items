@@ -21,11 +21,6 @@ contract MixAccountItems {
     mapping (address => mapping(bytes32 => uint)) accountItemIdIndex;
 
     /**
-     * @dev MixItemStoreRegistry contract.
-     */
-    MixItemStoreRegistry public itemStoreRegistry;
-
-    /**
      * @dev An account has added an item.
      * @param account Account that has added an item.
      * @param itemId itemId of item that has been added.
@@ -58,27 +53,10 @@ contract MixAccountItems {
     }
 
     /**
-     * @dev Revert if the item is not owned by sender.
-     * @param itemId itemId that must be owned.
-     */
-    modifier isOwner(bytes32 itemId) {
-        require (itemStoreRegistry.getItemStore(itemId).getOwner(itemId) == msg.sender, "Item is not owned by sender.");
-        _;
-    }
-
-    /**
-     * @param _itemStoreRegistry Address of the MixItemStoreRegistry contract.
-     */
-    constructor(MixItemStoreRegistry _itemStoreRegistry) public {
-        // Store the address of the MixItemStoreRegistry contract.
-        itemStoreRegistry = _itemStoreRegistry;
-    }
-
-    /**
      * @dev Add an item to the user.
      * @param itemId itemId of item to be added.
      */
-    function addItem(bytes32 itemId) external isNotAdded(itemId) isOwner(itemId) {
+    function addItem(bytes32 itemId) external isNotAdded(itemId) {
         // Get the list of itemIds for sender.
         bytes32[] storage itemIds = accountItemIds[msg.sender];
         // Add the itemId to the list.
@@ -93,7 +71,7 @@ contract MixAccountItems {
      * @dev Remove an item from the user.
      * @param itemId itemId of item to be removed.
      */
-    function removeItem(bytes32 itemId) external isAdded(itemId) isOwner(itemId) {
+    function removeItem(bytes32 itemId) external isAdded(itemId) {
         // Get the list of itemIds for sender.
         bytes32[] storage itemIds = accountItemIds[msg.sender];
         // Get the mapping of itemId indexes for sender.
