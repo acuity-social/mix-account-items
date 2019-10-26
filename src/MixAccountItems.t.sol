@@ -18,7 +18,7 @@ contract MixAccountItemsTest is DSTest {
     function setUp() public {
         mixItemStoreRegistry = new MixItemStoreRegistry();
         mixItemStoreIpfsSha256 = new MixItemStoreIpfsSha256(mixItemStoreRegistry);
-        mixAccountItems = new MixAccountItems();
+        mixAccountItems = new MixAccountItems(mixItemStoreRegistry);
         mixAccountItemsProxy = new MixAccountItemsProxy(mixAccountItems);
     }
 
@@ -33,6 +33,16 @@ contract MixAccountItemsTest is DSTest {
         mixAccountItems.addItem(itemId);
     }
 
+    function testControlAddItemNotOwner() public {
+        bytes32 itemId = mixItemStoreIpfsSha256.create(hex"00", hex"1234");
+        mixAccountItems.addItem(itemId);
+    }
+
+    function testFailAddItemNotOwner() public {
+        bytes32 itemId = mixItemStoreIpfsSha256.create(hex"00", hex"1234");
+        mixAccountItemsProxy.addItem(itemId);
+    }
+
     function testControlRemoveItemNotAdded() public {
         bytes32 itemId = mixItemStoreIpfsSha256.create(hex"00", hex"1234");
         mixAccountItems.addItem(itemId);
@@ -42,6 +52,18 @@ contract MixAccountItemsTest is DSTest {
     function testFailRemoveItemNotAdded() public {
         bytes32 itemId = mixItemStoreIpfsSha256.create(hex"00", hex"1234");
         mixAccountItems.removeItem(itemId);
+    }
+
+    function testControlRemoveItemNotOwner() public {
+        bytes32 itemId = mixItemStoreIpfsSha256.create(hex"00", hex"1234");
+        mixAccountItems.addItem(itemId);
+        mixAccountItems.removeItem(itemId);
+    }
+
+    function testFailRemoveItemNotOwner() public {
+        bytes32 itemId = mixItemStoreIpfsSha256.create(hex"00", hex"1234");
+        mixAccountItems.addItem(itemId);
+        mixAccountItemsProxy.removeItem(itemId);
     }
 
     function test() public {
